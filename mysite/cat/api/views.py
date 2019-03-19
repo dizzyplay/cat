@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import CatSerializer
-from cat.models import Cat
+from .serializers import CatSerializer, CatStatusSerializer
+from cat.models import Cat, CatStatus
 
 
 class CatView(APIView):
@@ -12,3 +12,13 @@ class CatView(APIView):
 
 
 main = CatView.as_view()
+
+
+class CatStatusView(APIView):
+    def get(self, request):
+        qs = CatStatus.objects.all()
+        serializer = CatStatusSerializer(qs, many=True)
+        return Response(serializer.data)
+
+
+cat_status = CatStatusView.as_view()

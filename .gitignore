@@ -1,0 +1,9 @@
+venv/
+.idea/
+db_user.sh
+*.pyc
+*.swp
+*.DS_Store
+static/
+media/
+__pycache__/

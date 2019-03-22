@@ -5,6 +5,3 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 ADD ./reqs/requirements.txt /code/
 RUN pip install -r requirements.txt
-ADD ./mysite/mysite /code/mysite
-ADD ./mysite/cat /code/cat
-ADD ./mysite/manage.py /code/

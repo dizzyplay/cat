@@ -1,6 +1,6 @@
 from .common import *
 
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG',False)
 ALLOWED_HOSTS = ['*']
 
 DATABASES = {

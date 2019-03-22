@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+    db:
+        image: postgres
+        volumes:
+            - ./docker/data:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=test_db
+            - POSTGRES_USER=test
+            - POSTGRES_PASSWORD=test
+            - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+
+    django:
+        build:
+            context: .
+            dockerfile: ./compose/django/Dockerfile-dev
+        environment:
+            - DJANGO_DEBUG=True
+            - DB_HOST=db
+            - DB_PORT=5432
+            - DB_NAME=test_db
+            - DB_USER=test
+            - DB_PASSWORD=test
+
+        ports:
+            - "8000:8000"
+        command:
+            - bash
+            - -c
+            - python manage.py runserver 0:8000
+        volumes:
+            - ./:/code/

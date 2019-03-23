@@ -4,5 +4,5 @@ RUN apt-get update && apt-get -y install \
 ENV PYTHONUNBUFFERED 1
 WORKDIR /code
 ADD ./reqs/requirements.txt /code/
-ADD . /code/
 RUN pip install -r requirements.txt
+

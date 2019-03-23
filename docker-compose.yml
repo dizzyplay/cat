@@ -27,7 +27,7 @@ services:
             - -c
             - gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
         environment:
-            - DJANGO_DEBUG=True
+            - DJANGO_DEBUG=False
             - DB_HOST=db
             - DB_NAME=cat_db
             - DB_USER=postgres

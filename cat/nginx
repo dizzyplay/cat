@@ -1,0 +1,12 @@
+upstream django {
+    ip_hash;
+    server django:8000;
+}
+
+server {
+    location / {
+        proxy_pass http://web/;
+    }
+    listen 80;
+    server_name localhost;
+}

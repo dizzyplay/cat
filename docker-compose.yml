@@ -1,6 +1,15 @@
 version : '3'
 
 services:
+    nginx:
+      image: nginx:latest
+      ports :
+        - "3000:80"
+      volumes:
+        - .:/code
+        - ./nginx:/etc/nginx/conf.d
+      depends_on:
+        - django
     db:
         image: postgres
         volumes:
@@ -13,11 +22,10 @@ services:
     
     django:
         build: .
-        command: python manage.py migrate
         command:
             - bash
             - -c
-            - python manage.py runserver 0.0.0.0:8000
+            - gunicorn cat.wsgi:application --bind 0.0.0.0:8000
         environment:
             - DJANGO_DEBUG=True
             - DB_HOST=db
@@ -27,8 +35,8 @@ services:
             - DB_PORT=5432
         volumes:
             - .:/code
-        ports:
-            - "3000:8000"
+        expose:
+          - "8000"
         depends_on:
             - db
 

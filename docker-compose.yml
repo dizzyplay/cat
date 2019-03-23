@@ -31,7 +31,7 @@ services:
             - python manage.py runserver 0:8000
         volumes:
             - ./:/code/
-            - web_dev:/code/
+            - django_packages:/usr/local/lib/python3.6/site-packages/
 volumes:
   postgres_dev_db:
-  web_dev:
+  django_packages:

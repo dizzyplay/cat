@@ -7,7 +7,7 @@ services:
         - "3000:80"
       volumes:
         - .:/code
-        - ./nginx:/etc/nginx/conf.d
+        - .:/etc/nginx/conf.d
       depends_on:
         - django
     db:
@@ -25,7 +25,7 @@ services:
         command:
             - bash
             - -c
-            - gunicorn cat.wsgi:application --bind 0.0.0.0:8000
+            - gunicorn mysite.wsgi:application --bind 0.0.0.0:8000
         environment:
             - DJANGO_DEBUG=True
             - DB_HOST=db

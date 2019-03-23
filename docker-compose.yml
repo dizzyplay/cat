@@ -1,0 +1,33 @@
+version : '3'
+
+services:
+    db:
+        image:postgres
+    volumes:
+        - postgres_db:/var/lib/postgresql/data
+    environment:
+        - POSTGRES_DB=cat_db
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+        - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    
+    django:
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+        environment:
+            - DJANGO_DEBUG=True
+            - DB_HOST=db
+            - DB_NAME=cat_db
+            - DB_USER=postgres
+            - DB_PASSWORD=postgres
+            - DB_PORT=5432
+        ports:
+            - "3000:8000"
+
+        command:
+            - bash
+            - -c
+            - python manage.py runserver 0:8000
+volumes:
+    postgres_db:

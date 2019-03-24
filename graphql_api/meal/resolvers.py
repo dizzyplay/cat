@@ -18,6 +18,7 @@ class CreateMeal(graphene.Mutation):
 
     meal = graphene.Field(MealType)
 
-    def mutate(self, info, title, kcal):
+    @staticmethod
+    def mutate(root, info, title, kcal):
         meal = Meal.objects.create(title=title, kcal=kcal)
         return CreateMeal(meal=meal)

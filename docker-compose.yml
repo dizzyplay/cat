@@ -4,7 +4,7 @@ services:
     db:
         image: postgres
         volumes:
-            - postgres_dev_db:/var/lib/postgresql/data
+            - test_postgres_dev_db:/var/lib/postgresql/data
         environment:
             - POSTGRES_DB=test_db
             - POSTGRES_USER=test
@@ -31,7 +31,9 @@ services:
             - python manage.py runserver 0:8000
         volumes:
             - ./:/code/
-            - django_packages:/usr/local/lib/python3.6/site-packages/
+            - test_django_packages:/usr/local/lib/python3.6/site-packages/
 volumes:
-  postgres_dev_db:
-  django_packages:
+  test_postgres_dev_db:
+      external: true
+  test_django_packages:
+      external: true

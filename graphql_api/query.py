@@ -37,14 +37,12 @@ for directory in subdirectories:
         pass
 
 queries_base_classes = queries_base_classes[::-1]
-# properties = {}
-# for base_class in queries_base_classes:
-#     print(base_class.__dict__['_meta'].fields)
-#     properties.update(base_class.__dict__['_meta'].fields)
-#     print(properties)
+properties = {}
+for base_class in queries_base_classes:
+    properties.update(base_class.__dict__['_meta'].fields)
 
 Queries = type(
     'Queries',
     tuple(queries_base_classes),
-    {}
+    properties
 )

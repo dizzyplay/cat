@@ -14,7 +14,7 @@ class CreateMeal(graphene.Mutation):
     def mutate(root, info, **kwargs):
         print(kwargs['title'])
         meal = Meal.objects.create(title=kwargs['title'], kcal=kwargs['kcal'])
-        return DjangoMealType(meal=meal)
+        return meal
 
 
 class Mutation(graphene.ObjectType):

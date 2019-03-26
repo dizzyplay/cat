@@ -1,12 +1,17 @@
 from graphene_django import DjangoObjectType
 from cat.models import Meal, CatStatus
+import graphene
 
 
-class MealType(DjangoObjectType):
+class DjangoMealType(DjangoObjectType):
     class Meta:
         model = Meal
+        filter_fields = {
+            'title': ['exact', 'icontains', 'istartswith']
+        }
+        interfaces = (graphene.relay.Node,)
 
 
-class StatusType(DjangoObjectType):
+class DjangoCatStatusType(DjangoObjectType):
     class Meta:
         model = CatStatus
